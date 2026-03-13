@@ -4,7 +4,7 @@
 
 ## Phase 1: Project Infrastructure & Setup
 
-- [ ] **Step 1: Root-level project scaffolding & Docker**
+- [x] **Step 1: Root-level project scaffolding & Docker**
   - **Task**: Create the monorepo structure with root configs, Docker Compose for MySQL development, environment example files, and updated `.gitignore`. This is the foundation — everything else depends on it.
   - **Files**:
     - `docker-compose.yml`: MySQL 8.0 service with persistent volume, ports 3306, credentials `chiriismart/chiriismart`, database `chiriismart`
@@ -14,7 +14,7 @@
   - **Step Dependencies**: None
   - **User Instructions**: Install Docker Desktop if not already installed. Run `docker-compose up -d mysql` to start the local MySQL instance.
 
-- [ ] **Step 2: NestJS backend initialization**
+- [x] **Step 2: NestJS backend initialization**
   - **Task**: Initialize the NestJS project inside `server/` with TypeScript, TypeORM, ConfigModule, and base configuration. Set up the modular structure with placeholder modules.
   - **Files**:
     - `server/package.json`: NestJS 10 dependencies — `@nestjs/core`, `@nestjs/common`, `@nestjs/platform-express`, `@nestjs/typeorm`, `@nestjs/config`, `@nestjs/schedule`, `@nestjs/throttler`, `typeorm`, `mysql2`, `class-validator`, `class-transformer`, `bcrypt`, `@types/bcrypt`

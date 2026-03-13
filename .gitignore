@@ -1,13 +1,44 @@
+# =============================================================================
+# ChiriiSmart — Git Ignore
+# =============================================================================
+
+# --- Python (legacy scraper) ---
 __pycache__/
 *.py[cod]
 *.egg-info/
-dist/
-build/
 .eggs/
 *.egg
 .venv/
 venv/
 env/
-output/*.csv
+
+# --- Node.js ---
+node_modules/
+dist/
+.turbo/
+
+# --- Build outputs ---
+build/
+coverage/
+
+# --- Environment & secrets ---
 .env
+.env.local
+.env.*.local
+
+# --- Logs ---
 *.log
+npm-debug.log*
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Project specific ---
+output/*.csv
