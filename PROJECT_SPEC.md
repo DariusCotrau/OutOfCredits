@@ -17,7 +17,7 @@ O aplicație web care centralizează chiriile disponibile din Timișoara și rec
 | Layer | Technology |
 |-------|-----------|
 | Frontend | TypeScript + React |
-| Backend | Node.js (Express/Fastify) |
+| Backend | Node.js (NestJS 10) |
 | Database | MySQL |
 | Maps | Google Maps API (Directions, Geocoding, Places) |
 | Deployment | Netlify (frontend), TBD (backend — Render/Railway/VPS) |
