@@ -1,5 +1,4 @@
-# VremBaniiDeLaHaufe
-Salut acesta este primul commit
+# OutOfCredits
 
 Idea: O aplicatie de imobliare care permite utilizatorilor sa centralizeze chiriile/apartemnetele disponibilie in orasul acestora.
 
@@ -14,4 +13,9 @@ Student La UVT , lucreaza part time la Haufe si merge la sala la Gym One. Aditio
 TypesScript + React + Node.js 
 
 Baza de date : MySQL
+
+Pentru depolyment netlify
+
+
+Optional dupa prima implmentare: Avertizare zona de constructii.
 
