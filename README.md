@@ -1,2 +1,2 @@
 # VremBaniiDeLaHaufe
-Repo pentru hackaton
+Salut acesta este primul commit
