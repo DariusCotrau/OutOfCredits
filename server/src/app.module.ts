@@ -15,13 +15,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { databaseConfig } from './config/database.config';
+import { envValidationSchema } from './config/env.validation';
 
 @Module({
   imports: [
-    // Load environment variables from .env, available globally
+    // Load and validate environment variables from .env
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+      validationSchema: envValidationSchema,
     }),
 
     // MySQL connection via TypeORM

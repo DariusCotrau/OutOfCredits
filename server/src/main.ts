@@ -25,18 +25,12 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true, // Strip properties not in DTO
       forbidNonWhitelisted: true, // Throw error on extra properties
-      transform: true, // Auto-transform query params to correct types
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
+      transform: true, // Auto-transform payloads to DTO instances
     }),
   );
 
   // CORS: allow requests from the frontend
-  const frontendUrl = configService.get<string>(
-    'FRONTEND_URL',
-    'http://localhost:5173',
-  );
+  const frontendUrl = configService.get<string>('FRONTEND_URL', 'http://localhost:5173');
   app.enableCors({
     origin: frontendUrl,
     credentials: true,
