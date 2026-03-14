@@ -1,0 +1,248 @@
+import { Platform, TextStyle } from 'react-native';
+export const fontFamilies = {
+  regular: Platform.select({
+    ios: 'System',
+    android: 'Roboto',
+    default: 'System',
+  }),
+  medium: Platform.select({
+    ios: 'System',
+    android: 'Roboto-Medium',
+    default: 'System',
+  }),
+  semibold: Platform.select({
+    ios: 'System',
+    android: 'Roboto-Medium',
+    default: 'System',
+  }),
+  bold: Platform.select({
+    ios: 'System',
+    android: 'Roboto-Bold',
+    default: 'System',
+  }),
+  mono: Platform.select({
+    ios: 'Menlo',
+    android: 'monospace',
+    default: 'monospace',
+  }),
+} as const;
+export type FontFamily = keyof typeof fontFamilies;
+export const fontSizes = {
+  xxs: 10,
+  xs: 12,
+  sm: 14,
+  base: 16,
+  md: 18,
+  lg: 20,
+  xl: 24,
+  '2xl': 28,
+  '3xl': 32,
+  '4xl': 36,
+  '5xl': 48,
+  '6xl': 60,
+} as const;
+export type FontSize = keyof typeof fontSizes;
+export const fontWeights = {
+  thin: '100' as const,
+  extralight: '200' as const,
+  light: '300' as const,
+  normal: '400' as const,
+  medium: '500' as const,
+  semibold: '600' as const,
+  bold: '700' as const,
+  extrabold: '800' as const,
+  black: '900' as const,
+};
+export type FontWeight = keyof typeof fontWeights;
+export const lineHeights = {
+  tight: 1.1,
+  snug: 1.25,
+  normal: 1.5,
+  relaxed: 1.625,
+  loose: 2,
+} as const;
+export type LineHeight = keyof typeof lineHeights;
+export const letterSpacing = {
+  tighter: -0.8,
+  tight: -0.4,
+  normal: 0,
+  wide: 0.4,
+  wider: 0.8,
+  widest: 1.6,
+} as const;
+export const typography = {
+  display1: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['6xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['6xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tighter,
+  } as TextStyle,
+  display2: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['5xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['5xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tighter,
+  } as TextStyle,
+  h1: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['4xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['4xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tight,
+  } as TextStyle,
+  h2: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['3xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['3xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tight,
+  } as TextStyle,
+  h3: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes['2xl'],
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes['2xl'] * lineHeights.snug,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  h4: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes.xl,
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes.xl * lineHeights.snug,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  h5: {
+    fontFamily: fontFamilies.medium,
+    fontSize: fontSizes.lg,
+    fontWeight: fontWeights.medium,
+    lineHeight: fontSizes.lg * lineHeights.snug,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  h6: {
+    fontFamily: fontFamilies.medium,
+    fontSize: fontSizes.md,
+    fontWeight: fontWeights.medium,
+    lineHeight: fontSizes.md * lineHeights.snug,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  bodyLarge: {
+    fontFamily: fontFamilies.regular,
+    fontSize: fontSizes.md,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.md * lineHeights.normal,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  body: {
+    fontFamily: fontFamilies.regular,
+    fontSize: fontSizes.base,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.base * lineHeights.normal,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  bodySmall: {
+    fontFamily: fontFamilies.regular,
+    fontSize: fontSizes.sm,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.sm * lineHeights.normal,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  caption: {
+    fontFamily: fontFamilies.regular,
+    fontSize: fontSizes.xs,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.xs * lineHeights.normal,
+    letterSpacing: letterSpacing.wide,
+  } as TextStyle,
+  captionSmall: {
+    fontFamily: fontFamilies.regular,
+    fontSize: fontSizes.xxs,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.xxs * lineHeights.normal,
+    letterSpacing: letterSpacing.wide,
+  } as TextStyle,
+  label: {
+    fontFamily: fontFamilies.medium,
+    fontSize: fontSizes.sm,
+    fontWeight: fontWeights.medium,
+    lineHeight: fontSizes.sm * lineHeights.snug,
+    letterSpacing: letterSpacing.wide,
+  } as TextStyle,
+  labelSmall: {
+    fontFamily: fontFamilies.medium,
+    fontSize: fontSizes.xs,
+    fontWeight: fontWeights.medium,
+    lineHeight: fontSizes.xs * lineHeights.snug,
+    letterSpacing: letterSpacing.wide,
+  } as TextStyle,
+  buttonLarge: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes.md,
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes.md * lineHeights.snug,
+    letterSpacing: letterSpacing.wide,
+    textTransform: 'none',
+  } as TextStyle,
+  button: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes.base,
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes.base * lineHeights.snug,
+    letterSpacing: letterSpacing.wide,
+    textTransform: 'none',
+  } as TextStyle,
+  buttonSmall: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes.sm,
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes.sm * lineHeights.snug,
+    letterSpacing: letterSpacing.wide,
+    textTransform: 'none',
+  } as TextStyle,
+  overline: {
+    fontFamily: fontFamilies.medium,
+    fontSize: fontSizes.xs,
+    fontWeight: fontWeights.medium,
+    lineHeight: fontSizes.xs * lineHeights.snug,
+    letterSpacing: letterSpacing.widest,
+    textTransform: 'uppercase',
+  } as TextStyle,
+  mono: {
+    fontFamily: fontFamilies.mono,
+    fontSize: fontSizes.base,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.base * lineHeights.normal,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  monoSmall: {
+    fontFamily: fontFamilies.mono,
+    fontSize: fontSizes.sm,
+    fontWeight: fontWeights.normal,
+    lineHeight: fontSizes.sm * lineHeights.normal,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+  statLarge: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['4xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['4xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tight,
+  } as TextStyle,
+  stat: {
+    fontFamily: fontFamilies.bold,
+    fontSize: fontSizes['2xl'],
+    fontWeight: fontWeights.bold,
+    lineHeight: fontSizes['2xl'] * lineHeights.tight,
+    letterSpacing: letterSpacing.tight,
+  } as TextStyle,
+  statSmall: {
+    fontFamily: fontFamilies.semibold,
+    fontSize: fontSizes.lg,
+    fontWeight: fontWeights.semibold,
+    lineHeight: fontSizes.lg * lineHeights.tight,
+    letterSpacing: letterSpacing.normal,
+  } as TextStyle,
+} as const;
+export type Typography = typeof typography;
+export type TextVariant = keyof Typography;
