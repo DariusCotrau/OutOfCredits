@@ -1,0 +1,28 @@
+{
+  "name": "AppBlocker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-native": "0.76.9",
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "react-native-background-actions": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@babel/preset-env": "^7.25.0",
+    "@babel/runtime": "^7.25.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "react-test-renderer": "18.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

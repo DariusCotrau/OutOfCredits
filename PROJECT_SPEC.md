@@ -1,191 +1,91 @@
-# ChiriiSmart - Centralizator Inteligent de Chirii
+# AppBlocker - Aplicație Android de Blocare a Aplicațiilor
 
-O aplicație web care centralizează chiriile disponibile din Timișoara și recomandă cele mai potrivite opțiuni pe baza profilului utilizatorului (locul de muncă, universitate, hobby-uri, mijloc de transport).
+O aplicație Android construită cu React Native care monitorizează timpul de utilizare al aplicațiilor și le blochează automat când limita de timp impusă este atinsă.
 
-## Target Audience
+## Descriere
 
-- **Studenți** din Timișoara (UVT, UPT, UMFT) care caută chirii accesibile, aproape de campus
-- **Tineri profesioniști** care lucrează în oraș (ex: part-time la Haufe, Continental, etc.)
-- **Persoane care se mută** în Timișoara și nu cunosc zonele
-
-### User Persona (Exemplu)
-> Student la UVT, lucrează part-time la Haufe, merge la sala Gym One.
-> Are/nu are mașină. Buget: 250-350 EUR/lună.
+AppBlocker permite utilizatorului să seteze limite de timp zilnice pentru aplicațiile instalate pe telefon. Când o aplicație depășește limita, un overlay fullscreen blochează accesul la aceasta, forțând utilizatorul să își gestioneze mai bine timpul.
 
 ## Tech Stack
 
-| Layer | Technology |
+| Layer | Tehnologie |
 |-------|-----------|
-| Frontend | TypeScript + React |
-| Backend | Node.js (NestJS 10) |
-| Database | MySQL |
-| Maps | Google Maps API (Directions, Geocoding, Places) |
-| Deployment | Netlify (frontend), TBD (backend — Render/Railway/VPS) |
-| Auth | Email + Password + Google OAuth |
+| Framework | React Native 0.76+ |
+| Platforma | Android (API 26+) |
+| Module Native | Java (Android UsageStatsManager, WindowManager) |
+| Persistență | AsyncStorage |
+| Background | Android Foreground Service |
 
-> **Nota:** Scraper-ul Python existent va fi rescris în Node.js pentru a menține un singur tech stack.
+## Funcționalități
 
-## Desired Features
+### Core (MVP)
 
-### Phase 1 — MVP (Core)
+#### Permisiuni și Setup
+- [ ] Verificare și cerere permisiune Usage Access (USAGE_STATS)
+- [ ] Verificare și cerere permisiune Overlay (SYSTEM_ALERT_WINDOW)
+- [ ] Onboarding flow pentru acordarea permisiunilor
 
-#### Data Collection (Scraper Node.js)
-- [ ] Rescrierea scraper-ului Imobiliare.ro din Python în Node.js
-  - [ ] Extragere aceleași 14 câmpuri: titlu, preț, monedă, nr. camere, suprafață utilă/totală, etaj, tip imobil, an construcție, localitate, zonă, URL
-  - [ ] Rate limiting și delay aleatoriu între request-uri
-  - [ ] Retry logic cu exponential backoff
-  - [ ] User-Agent rotation
-- [ ] Stocare date în MySQL
-  - [ ] Schema tabel `listings` cu toate câmpurile + timestamps
-  - [ ] Deduplicare pe baza URL-ului
-- [ ] Rulare periodică (cron job / node-cron) pentru actualizarea datelor
-- [ ] Focus doar pe Timișoara (apartamente și garsoniere de închiriat)
+#### Gestionare Reguli
+- [ ] Vizualizare lista aplicații instalate (non-sistem)
+- [ ] Selectare aplicații de blocat
+- [ ] Setare limită de timp per aplicație (minute)
+- [ ] Activare/dezactivare reguli individuale
+- [ ] Persistența regulilor în AsyncStorage
 
-#### Backend API (Node.js)
-- [ ] `GET /api/listings` — listare anunțuri cu filtre (preț, camere, suprafață, zonă)
-- [ ] `GET /api/listings/:id` — detalii anunț
-- [ ] `POST /api/profile` — salvare profil utilizator
-- [ ] `GET /api/recommendations` — anunțuri recomandate pe baza profilului
-- [ ] Paginare și sortare
+#### Monitorizare și Blocare
+- [ ] Foreground Service care monitorizează utilizarea la fiecare 5 secunde
+- [ ] Interogare UsageStatsManager pentru timpul zilnic de foreground
+- [ ] Afișare overlay fullscreen când limita este depășită
+- [ ] Notificare persistentă (foreground service)
 
-#### Autentificare
-- [ ] Înregistrare cu email + parolă
-  - [ ] Validare email
-  - [ ] Hashare parolă (bcrypt)
-- [ ] Login cu Google OAuth 2.0
-- [ ] JWT tokens pentru sesiuni
-- [ ] Middleware de protecție rute
+#### Vizualizare Utilizare
+- [ ] Dashboard cu timpul utilizat per aplicație astăzi
+- [ ] Procent din limita consumată
+- [ ] Timp rămas pentru fiecare aplicație blocată
 
-#### User Profile & Onboarding
-- [ ] Formular de profil cu:
-  - [ ] Universitate (selectare din listă: UVT, UPT, UMFT, sau adresă custom)
-  - [ ] Loc de muncă (adresă sau selectare din locații cunoscute)
-  - [ ] Sală de sport / alte locații frecventate (adresă)
-  - [ ] Mijloc de transport: mașină / transport public / bicicletă / pe jos
-  - [ ] Buget maxim (EUR/RON)
-  - [ ] Preferințe: nr. camere minim, suprafață minimă, etaj preferat
-- [ ] Geocodare automată a adreselor introduse (Google Geocoding API)
+### Phase 2
 
-#### Recommendation Engine
-- [ ] Calcul timp de deplasare de la fiecare anunț la locațiile din profil
-  - [ ] Google Directions API cu modul de transport corespunzător
-  - [ ] Cache rezultate pentru a reduce costurile API
-- [ ] Formula de scoring:
-  - [ ] `scor = w1 * scor_pret + w2 * scor_distanta + w3 * scor_preferinte`
-  - [ ] Ponderi configurabile
-- [ ] Sortare anunțuri după scor de compatibilitate
+- [ ] Statistici săptămânale/lunare
+- [ ] Programare pe ore (ex: blocare doar între 22:00-06:00)
+- [ ] Notificări de avertizare la 80% din limită
+- [ ] Export date utilizare
+- [ ] Widget home screen cu statistici
 
-#### Frontend (React + TypeScript)
-- [ ] Landing page cu prezentarea aplicației
-- [ ] Pagină de înregistrare / login
-- [ ] Pagină de profil (onboarding wizard)
-- [ ] Pagină de listare anunțuri
-  - [ ] Grid/List view cu card-uri
-  - [ ] Filtre laterale (preț, camere, suprafață, zonă)
-  - [ ] Sortare (preț, scor, distanță, dată)
-- [ ] Pagină de detalii anunț
-  - [ ] Informații complete
-  - [ ] Hartă cu locația
-  - [ ] Timp de deplasare la locațiile din profil
-- [ ] Pagină de recomandări personalizate
-
-### Phase 2 — Enhanced UX
-
-#### Hartă Interactivă
-- [ ] Google Maps embed cu pin-uri pentru fiecare anunț
-- [ ] Clustere de pin-uri la zoom out
-- [ ] Popup la click cu preview anunț
-- [ ] Evidențiere zone recomandate (heat map sau coloring)
-- [ ] Afișare rute de la anunț la locațiile din profil
-
-#### Notificări și Alerte
-- [ ] Email alert pentru anunțuri noi care se potrivesc profilului
-- [ ] Configurare frecvență notificări (instant / zilnic / săptămânal)
-- [ ] Alertă zonă de construcții în apropierea unui anunț
-
-#### Surse Adiționale de Date
-- [ ] Scraping OLX.ro (secțiunea imobiliare)
-- [ ] Scraping Storia.ro
-- [ ] Deduplicare cross-platform (anunțuri identice pe mai multe site-uri)
-
-### Phase 3 — Nice to Have
-
-- [ ] Comparare side-by-side a anunțurilor
-- [ ] Salvare anunțuri favorite
-- [ ] Istoric prețuri (tracking modificări)
-- [ ] Review-uri zone / cartiere de la utilizatori
-- [ ] Dark mode
-- [ ] PWA (Progressive Web App) pentru experiență mobilă
-- [ ] Expandare la alte orașe (Cluj-Napoca, București, Iași)
-
-## Design Requests
-
-- [ ] UI modern, clean, responsive (mobile-first)
-  - [ ] Design system consistent (culori, fonturi, spacing)
-  - [ ] Card-uri cu preview pentru fiecare anunț (imagine placeholder dacă nu e disponibilă)
-- [ ] Onboarding wizard intuitiv (3-4 pași)
-- [ ] Dashboard clar cu recomandările principale vizibile imediat
-- [ ] Hartă vizibilă pe pagina principală de listare
-
-## Database Schema (Draft)
-
-```sql
--- Utilizatori
-users (id, email, password_hash, google_id, name, created_at, updated_at)
-
--- Profile utilizatori
-profiles (id, user_id, university, workplace, gym, other_locations JSON,
-          transport_mode ENUM('car','public','bike','walk'),
-          budget_max, budget_currency, min_rooms, min_area, preferred_floor,
-          created_at, updated_at)
-
--- Anunțuri imobiliare
-listings (id, source, source_url, title, price, currency,
-          rooms, useful_area_sqm, total_area_sqm, floor,
-          building_type, year_built, city, zone,
-          latitude, longitude,
-          first_seen_at, last_seen_at, is_active,
-          created_at, updated_at)
-
--- Cache distanțe
-distance_cache (id, listing_id, destination_lat, destination_lng,
-                transport_mode, duration_seconds, distance_meters,
-                calculated_at)
-```
-
-## Project Structure (Proposed)
+## Arhitectură
 
 ```
-/
-├── client/                  # React frontend
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   ├── services/       # API client
-│   │   ├── types/
-│   │   └── utils/
-│   ├── package.json
-│   └── tsconfig.json
-├── server/                  # Node.js backend
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── models/
-│   │   ├── middleware/
-│   │   ├── scraper/        # Node.js scraper (rewrite)
-│   │   └── utils/
-│   ├── package.json
-│   └── tsconfig.json
-├── database/
-│   └── migrations/
-└── README.md
+AppBlocker/
+├── android/                          # Cod nativ Android
+│   └── app/src/main/
+│       ├── AndroidManifest.xml
+│       └── java/com/appblocker/
+│           └── modules/
+│               ├── AppBlockerPackage.java    # Înregistrare module RN
+│               ├── AppUsageModule.java       # UsageStatsManager bridge
+│               ├── OverlayModule.java        # Permisiune overlay bridge
+│               ├── BlockerService.java       # Foreground service monitorizare
+│               └── BlockerServiceModule.java # Control service din JS
+├── src/
+│   ├── models/
+│   │   └── BlockRule.js              # Model regulă de blocare
+│   ├── native/
+│   │   ├── AppUsageBridge.js         # Bridge JS pentru AppUsageModule
+│   │   ├── BlockerServiceBridge.js   # Bridge JS pentru BlockerServiceModule
+│   │   └── OverlayBridge.js          # Bridge JS pentru OverlayModule
+│   ├── services/
+│   │   ├── BlockerManager.js         # Manager central logică blocare
+│   │   ├── PermissionService.js      # Gestionare permisiuni
+│   │   └── StorageService.js         # CRUD reguli în AsyncStorage
+│   └── utils/
+│       └── timeUtils.js              # Formatare și calcule timp
+└── package.json
 ```
 
-## Other Notes
+## Permisiuni Android Necesare
 
-- **Google Maps API costs**: Implementare cache agresiv pentru Directions API (costă $5/1000 request-uri). Recalculare doar când apare un anunț nou sau se modifică profilul.
-- **Legal**: Respectarea `robots.txt` și Terms of Service ale site-urilor de imobiliare. Rate limiting generos.
-- **GDPR**: Datele utilizatorilor stocate conform GDPR (drept de ștergere, export date).
-- **Timișoara focus**: Început cu date POI (Points of Interest) pre-populate pentru UVT, UPT, UMFT, Haufe, Gym One, etc.
+| Permisiune | Scop |
+|-----------|------|
+| `PACKAGE_USAGE_STATS` | Citire statistici utilizare aplicații |
+| `SYSTEM_ALERT_WINDOW` | Afișare overlay peste alte aplicații |
+| `FOREGROUND_SERVICE` | Rulare serviciu de monitorizare în background |
+| `RECEIVE_BOOT_COMPLETED` | Repornire automată serviciu după restart telefon |

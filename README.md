@@ -1,21 +1,29 @@
-# OutOfCredits
+# AppBlocker
 
-Idea: O aplicatie de imobliare care permite utilizatorilor sa centralizeze chiriile/apartemnetele disponibilie in orasul acestora.
+Aplicație Android (React Native) care blochează alte aplicații când limita de timp zilnică este depășită.
 
-Pas 1: tool de adunat datele de pe siteurile de imobiliare disponibile.
+## Funcționalități
+- Monitorizare timp de utilizare per aplicație (UsageStatsManager)
+- Setare limite de timp zilnice per aplicație
+- Blocare automată prin overlay fullscreen
+- Foreground service pentru monitorizare continuă
 
-In functie de job/ocupatie/pasiuni  sa reomande chirii
+## Structura Proiectului
+- `AppBlocker/android/` — Module native Java (UsageStats, Overlay, BlockerService)
+- `AppBlocker/src/` — Service layer JS (modele, servicii, utilitare, bridge-uri native)
 
-Idei User:
+## Cerințe
+- Android API 26+ (Android 8.0 Oreo)
+- Node.js 18+ (pentru build React Native)
+- Android Studio / SDK Tools
 
-Student La UVT , lucreaza part time la Haufe si merge la sala la Gym One. Aditional: are/n-are masina.
+## Setup
+```bash
+cd AppBlocker
+npm install
+npx react-native run-android
+```
 
-TypesScript + React + Node.js 
-
-Baza de date : MySQL
-
-Pentru depolyment netlify
-
-
-Optional dupa prima implmentare: Avertizare zona de constructii.
-
+## Permisiuni Necesare
+- **Usage Access** — pentru citirea statisticilor de utilizare
+- **Draw Over Other Apps** — pentru afișarea overlay-ului de blocare
