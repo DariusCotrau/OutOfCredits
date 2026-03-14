@@ -13,6 +13,7 @@ import {
 import clsx from 'clsx'
 import { mockListings } from '../data/mockListings'
 import { useAuthStore } from '../store/authStore'
+import MapView from '../components/MapView'
 
 const sourceColors: Record<string, string> = {
   imobiliare: 'bg-orange-100 text-orange-700',
@@ -181,16 +182,10 @@ export default function ListingDetailPage() {
             </div>
           )}
 
-          {/* Map placeholder */}
+          {/* Map */}
           <div>
             <h2 className="text-lg font-semibold text-gray-800 mb-3">Localizare</h2>
-            <div className="w-full h-52 bg-gray-100 rounded-2xl flex flex-col items-center justify-center border border-gray-200 text-gray-400">
-              <MapPin className="w-8 h-8 mb-2" />
-              <p className="text-sm font-medium">Hartă indisponibilă</p>
-              <p className="text-xs mt-1">
-                {listing.lat.toFixed(4)}, {listing.lng.toFixed(4)}
-              </p>
-            </div>
+            <MapView listings={[listing]} singleListing height="220px" />
           </div>
         </div>
 

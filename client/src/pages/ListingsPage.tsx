@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { SlidersHorizontal, X, List, Map } from 'lucide-react'
 import ListingCard from '../components/ListingCard'
 import FilterBar, { type Filters, defaultFilters } from '../components/FilterBar'
+import MapView from '../components/MapView'
 import { mockListings } from '../data/mockListings'
 import type { Listing } from '../types'
 
@@ -64,6 +65,7 @@ export default function ListingsPage() {
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [loading] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list')
 
   const filtered = applyFilters(mockListings, filters)
 
@@ -77,14 +79,41 @@ export default function ListingsPage() {
             {filtered.length} {filtered.length === 1 ? 'rezultat' : 'rezultate'} găsite
           </p>
         </div>
-        {/* Mobile filter toggle */}
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="md:hidden flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
-        >
-          <SlidersHorizontal className="w-4 h-4" />
-          Filtre
-        </button>
+        <div className="flex items-center gap-2">
+          {/* View toggle */}
+          <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
+                viewMode === 'list'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <List className="w-4 h-4" />
+              <span className="hidden sm:inline">Listă</span>
+            </button>
+            <button
+              onClick={() => setViewMode('map')}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
+                viewMode === 'map'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Map className="w-4 h-4" />
+              <span className="hidden sm:inline">Hartă</span>
+            </button>
+          </div>
+          {/* Mobile filter toggle */}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="md:hidden flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+            Filtre
+          </button>
+        </div>
       </div>
 
       <div className="flex gap-6">
@@ -112,9 +141,11 @@ export default function ListingsPage() {
           </div>
         )}
 
-        {/* Listings grid */}
+        {/* Content */}
         <div className="flex-1 min-w-0">
-          {loading ? (
+          {viewMode === 'map' ? (
+            <MapView listings={filtered} height="calc(100vh - 220px)" />
+          ) : loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[1, 2, 3].map((i) => (
                 <SkeletonCard key={i} />
