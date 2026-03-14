@@ -73,7 +73,7 @@ export default function FilterBar({ filters, onChange }: Props) {
   }
 
   return (
-    <aside className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 space-y-6 sticky top-20 self-start">
+    <aside className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-gray-800">Filtre</h2>
