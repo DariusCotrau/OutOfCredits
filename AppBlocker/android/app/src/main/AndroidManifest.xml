@@ -35,5 +35,15 @@
             android:exported="false"
             android:foregroundServiceType="specialUse" />
 
+        <!-- Receiver pentru repornire serviciu după boot -->
+        <receiver
+            android:name=".modules.BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>

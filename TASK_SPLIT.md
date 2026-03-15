@@ -14,23 +14,23 @@ Responsabilă pentru tot codul nativ Java care interacționează direct cu API-u
 - [x] `AppBlockerPackage.java` — înregistrare module
 
 #### 2. Îmbunătățiri BlockerService
-- [ ] Adăugare suport pentru limite de timp diferite per aplicație (acum e o singură limită globală)
-- [ ] Detectare corectă a aplicației din foreground (nu doar aggregate, ci real-time)
-- [ ] Gestionare lifecycle corectă (restart după kill, boot completed receiver)
+- [x] Adăugare suport pentru limite de timp diferite per aplicație (acum e o singură limită globală)
+- [x] Detectare corectă a aplicației din foreground (nu doar aggregate, ci real-time)
+- [x] Gestionare lifecycle corectă (restart după kill, boot completed receiver)
 - [ ] Testare pe Android 10, 11, 12, 13, 14 (restricții background diferite)
 
 #### 3. BootReceiver
-- [ ] Creare `BootCompletedReceiver.java` care repornește `BlockerService` la boot
-- [ ] Înregistrare în AndroidManifest.xml
+- [x] Creare `BootCompletedReceiver.java` care repornește `BlockerService` la boot
+- [x] Înregistrare în AndroidManifest.xml
 
 #### 4. Overlay Avansat
-- [ ] Înlocuire TextView simplu cu un layout XML custom pentru overlay
-- [ ] Buton "Întoarcere la AppBlocker" pe overlay
-- [ ] Animație la apariția overlay-ului
+- [x] Înlocuire TextView simplu cu un layout XML custom pentru overlay
+- [x] Buton "Întoarcere la AppBlocker" pe overlay
+- [x] Animație la apariția overlay-ului
 
 #### 5. Notificări
-- [ ] Notificare de avertizare la 80% din limită (per aplicație)
-- [ ] Acțiuni pe notificare (extindere limită cu 15 min, deschide AppBlocker)
+- [x] Notificare de avertizare la 80% din limită (per aplicație)
+- [x] Acțiuni pe notificare (extindere limită cu 15 min, deschide AppBlocker)
 
 #### 6. Testare
 - [ ] Unit tests pentru logica de monitorizare
