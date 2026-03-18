@@ -1,44 +1,50 @@
-# =============================================================================
-# ChiriiSmart — Git Ignore
-# =============================================================================
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-# --- Python (legacy scraper) ---
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-*.egg
-.venv/
-venv/
-env/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# --- Node.js ---
-node_modules/
-dist/
-.turbo/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-# --- Build outputs ---
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
-coverage/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# --- Environment & secrets ---
-.env
-.env.local
-.env.*.local
+### VS Code ###
+.vscode/
 
-# --- Logs ---
-*.log
-npm-debug.log*
-
-# --- OS files ---
+### Mac / Windows ###
 .DS_Store
 Thumbs.db
 
-# --- IDE ---
-.idea/
-.vscode/
-*.swp
-*.swo
+### Excel temp ###
+~$*.xlsx
 
-# --- Project specific ---
-output/*.csv
+### Environment ###
+.env
+.env.local
+.env.*.local
+application-local.properties
+
+### Logs ###
+*.log
+src/main/resources/application.properties

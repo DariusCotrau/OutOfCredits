@@ -3,7 +3,11 @@
     "allow": [
       "Bash(find:*)",
       "Bash(cd:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(java -version)",
+      "Bash(mvn -version)",
+      "Bash(mvn clean:*)"
     ]
   }
 }
